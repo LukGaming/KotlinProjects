@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FirstProject</string>
+    <string name="hint_name">Nome</string>
+    <string name="hint_age">Idade</string>
+    <string name="btn_show">Mostrar</string>
+    <string name="result">Resultado aqui</string>
 </resources>

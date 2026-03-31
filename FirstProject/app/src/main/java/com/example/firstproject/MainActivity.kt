@@ -7,36 +7,47 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(){
+
+    private lateinit var etName: EditText;
+    private lateinit var  etAge: EditText;
+    private lateinit var btnShow: Button;
+    private lateinit var tvResult: TextView;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val etName = findViewById<EditText>(R.id.etName)
-        val btnShow = findViewById<Button>(R.id.btnShow)
-        val tvResult = findViewById<TextView>(R.id.tvResult)
-        val etAge = findViewById<EditText>(R.id.etAge)
-        val btnClear = findViewById<Button>(R.id.btnClear)
+        etName = findViewById(R.id.etName);
+        etAge = findViewById(R.id.etAge);
+        btnShow = findViewById(R.id.btnShow)
+        tvResult = findViewById(R.id.tvResult)
 
         btnShow.setOnClickListener {
+            if(!validateForm()) return@setOnClickListener;
             val name = etName.text.toString();
-            val idade = etAge.text.toString()
+            val age = etAge.text.toString();
 
-
-
-            if(name.trim().isEmpty()){
-                tvResult.setText("Digite um nome!")
-
-            }else{
-                tvResult.setText("Olá, $name, $idade anos!");
-            }
+            tvResult.setText("Olá $name, você tem $age anos")
 
         }
 
-        btnClear.setOnClickListener {
-            etName.setText("")
-            etAge.setText("")
-            btnShow.setText("")
-            tvResult.setText("")
-        }
     }
+
+    private fun validateForm(): Boolean {
+        val name = etName.text.toString();
+        val age = etAge.text.toString();
+
+        if(name.isEmpty()){
+            etName.error = "Digite seu nome"
+            return false;
+
+        }
+        val ageInt = age.toIntOrNull();
+
+        if(ageInt == null || ageInt <=0){
+            etAge.error = "Idade inválida"
+            return false;
+        }
+        return true;
+    }
+
 }
