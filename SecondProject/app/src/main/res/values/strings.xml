@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">loginandnaviation</string>
+    <string name="et_name">Nome</string>
+    <string name="et_age">Idade</string>
+    <string name="btn_show" >Mostrar</string>
+    <string name="tv_result" >Resultado aqui</string>
+    <string name="tv_welcome" >Bem-vindo!</string>
+    <string name="navigation_button">Navegar</string>
+    <string name="home_text" >Bem-vindo</string>
+</resources>
