@@ -6,6 +6,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerClients"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_margin="24dp"
+        android:layout_marginTop="60dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,7 @@ class HomeActivity: AppCompatActivity() {
         recyclerClientes = findViewById(R.id.recyclerClients)
 
 
-        val clients = listOf<Client>(
+        val clients = mutableListOf<Client>(
             Client("Paulo", 27),
             Client("João", 22),
             Client("Elliezer", 25),

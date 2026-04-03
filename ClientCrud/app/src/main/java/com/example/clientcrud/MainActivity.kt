@@ -1,10 +1,7 @@
 package com.example.clientcrud
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -19,11 +16,12 @@ class MainActivity : AppCompatActivity() {
         recyclerClientes = findViewById(R.id.recyclerClients)
 
 
-        val clients = listOf<Client>(
+        val clients = mutableListOf<Client>(
             Client("Paulo", 27),
             Client("João", 22),
             Client("Elliezer", 25),
-            Client("Elliezer", 25),
+            Client("Júlio", 30),
+            Client("Marcelo", 55),
         )
 
         recyclerClientes.layoutManager = LinearLayoutManager(this)
