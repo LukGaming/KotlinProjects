@@ -18,6 +18,7 @@ class ClientAdapter(
 ) : RecyclerView.Adapter<ClientAdapter.ClientViewHolder>(){
 
     class ClientViewHolder(view: View) : RecyclerView.ViewHolder(view){
+
         val name = view.findViewById<TextView>(R.id.tvName)
         val age = view.findViewById<TextView>(R.id.tvAge)
         val btnDelete = view.findViewById<Button>(R.id.btnDelete)
