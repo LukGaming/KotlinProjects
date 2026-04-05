@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var btnAddClient: Button
 
+    lateinit var clients: MutableList<Client>;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,7 +27,9 @@ class MainActivity : AppCompatActivity() {
         btnAddClient = findViewById<Button>(R.id.btnAddClient)
 
 
-        val clients = mutableListOf<Client>(
+
+
+         clients = mutableListOf<Client>(
             Client("Paulo", 27),
             Client("João", 22),
             Client("Elliezer", 25),
@@ -39,12 +43,13 @@ class MainActivity : AppCompatActivity() {
         createClientLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
             if(result.resultCode == RESULT_OK){
-                val data = result.data
-                val name = data?.getStringExtra("CLIENT_NAME")
-                val age = data?.getIntExtra("CLIENT_AGE", 0)
 
-                if(name != null && age != null){
-                    println("Age: $age, name: $name")
+                val data = result.data
+                val client = data?.getSerializableExtra("CLIENT") as? Client
+
+
+                if(client != null){
+                    addClient(client)
                 }
             }
         }
@@ -54,5 +59,10 @@ class MainActivity : AppCompatActivity() {
             createClientLauncher.launch(intent)
         }
 
+    }
+
+    fun addClient(client: Client){
+        clients.add(client)
+        recyclerClientes.adapter!!.notifyItemInserted(clients.size)
     }
 }

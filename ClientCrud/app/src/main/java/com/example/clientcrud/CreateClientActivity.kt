@@ -1,5 +1,6 @@
 package com.example.clientcrud
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -21,11 +22,32 @@ class CreateClientActivity  : AppCompatActivity() {
 
 
         btnSave.setOnClickListener {
-
+            saveClient()
         }
     }
 
     private fun saveClient(){
+        val name = etName.text.toString()
+        var age = etAge.text.toString().toIntOrNull()
+
+        if(name.isEmpty()){
+            etName.error = "Digite o nome"
+            return;
+        }
+        if(age == null || age <= 0){
+            etAge.error = "Idade inválida"
+        }
+
+        val intent = Intent()
+
+        val createdClient = Client(name, age!!)
+
+        intent.putExtra("CLIENT", createdClient)
+
+
+        setResult(RESULT_OK, intent)
+
+        finish()
     }
 
 }
