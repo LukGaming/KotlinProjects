@@ -1,8 +1,8 @@
-package com.example.myapplication
+package com.example.myapplication.Data.remote
 
+import com.example.myapplication.CepResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
-
 
 interface CepService {
     @GET("ws/{cep}/json")

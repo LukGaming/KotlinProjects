@@ -1,5 +1,6 @@
-package com.example.myapplication
+package com.example.myapplication.Data.remote
 
+import com.example.myapplication.Data.remote.CepService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
