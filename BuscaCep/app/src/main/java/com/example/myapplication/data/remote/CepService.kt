@@ -1,4 +1,4 @@
-package com.example.myapplication.Data.remote
+package com.example.myapplication.data.remote
 
 import com.example.myapplication.CepResponse
 import retrofit2.http.GET
