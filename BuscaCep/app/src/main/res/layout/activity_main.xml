@@ -32,4 +32,11 @@
         android:visibility="gone"
         android:layout_gravity="center" />
 
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

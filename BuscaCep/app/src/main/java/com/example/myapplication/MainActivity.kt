@@ -18,10 +18,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var etCep: EditText
     lateinit var btnBuscar: Button
     lateinit var tvResultado: TextView
-
     lateinit var viewModel: CepViewModel
-
     lateinit var progress: ProgressBar
+    lateinit var errorEt: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         btnBuscar = findViewById(R.id.btnBuscar)
         tvResultado = findViewById(R.id.tvResultado)
         progress = findViewById(R.id.progress)
+        errorEt = findViewById(R.id.error)
 
         viewModel = ViewModelProvider(this)[CepViewModel::class.java]
 
@@ -44,24 +44,40 @@ class MainActivity : AppCompatActivity() {
 
 
         viewModel.loading.observe(this) { loading ->
+            onViewModelLoading(loading)
+        }
 
-            if (loading) {
-                progress.visibility = View.VISIBLE
-            } else {
-                progress.visibility = View.GONE
-
-            }
-
+        viewModel.error.observe(this) { error ->
+            onViewModelError(error)
         }
 
         viewModel.cepResult.observe(this) { cep ->
-            tvResultado.text = """
+            onCepResult(cep)
+        }
+
+    }
+
+    fun onCepResult(cep: CepResponse) {
+        errorEt.visibility = View.GONE
+
+        tvResultado.text = """
              Rua: ${cep.logradouro}
              Bairro: ${cep.bairro}
              Cidade: ${cep.localidade}
              UF: ${cep.uf}
          """.trimIndent()
-        }
+    }
 
+    fun onViewModelError(error: String) {
+        errorEt.text = error;
+        errorEt.visibility = View.VISIBLE
+    }
+
+    fun onViewModelLoading(loading: Boolean) {
+        if (loading) {
+            progress.visibility = View.VISIBLE
+        } else {
+            progress.visibility = View.GONE
+        }
     }
 }
