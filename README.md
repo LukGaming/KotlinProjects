@@ -54,7 +54,8 @@ Ao final dos 30 dias, quero ter:
 - Um projeto Android funcional e evoluído dia após dia
 - Mais domínio de Android nativo com Kotlin
 - Clareza sobre arquitetura, organização e manutenção de código
-
+- MVVM e Arquitetura Limpa
 ---
 
 Se você também está aprendendo Android, fique à vontade para acompanhar este desafio e trocar ideias.
+
