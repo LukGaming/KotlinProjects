@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.data.Models
 
 data class CepResponse(
     val cep: String,

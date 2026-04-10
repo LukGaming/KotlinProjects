@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.data.Models.CepResponse
 import com.example.myapplication.ui.cep.CepViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -37,23 +38,13 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[CepViewModel::class.java]
 
-        btnBuscar.setOnClickListener {
-            val cep = etCep.text.toString().replace("-", "")
-            viewModel.buscarCep(cep)
-        }
+        btnBuscar.setOnClickListener(::onClickListener)
 
+        viewModel.loading.observe(this, ::onViewModelLoading)
 
-        viewModel.loading.observe(this) { loading ->
-            onViewModelLoading(loading)
-        }
+        viewModel.error.observe(this, ::onViewModelError)
 
-        viewModel.error.observe(this) { error ->
-            onViewModelError(error)
-        }
-
-        viewModel.cepResult.observe(this) { cep ->
-            onCepResult(cep)
-        }
+        viewModel.cepResult.observe(this, ::onCepResult)
 
     }
 
@@ -66,6 +57,12 @@ class MainActivity : AppCompatActivity() {
              Cidade: ${cep.localidade}
              UF: ${cep.uf}
          """.trimIndent()
+    }
+
+    fun onClickListener(view: View) {
+        val cep = etCep.text.toString().replace("-", "")
+        viewModel.buscarCep(cep)
+
     }
 
     fun onViewModelError(error: String) {
