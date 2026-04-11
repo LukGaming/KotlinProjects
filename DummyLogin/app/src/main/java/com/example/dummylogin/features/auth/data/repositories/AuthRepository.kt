@@ -1,4 +1,4 @@
-package com.example.dummylogin.features.auth.data
+package com.example.dummylogin.features.auth.data.repositories
 
 import com.example.dummylogin.features.auth.data.model.LoginRequest
 import com.example.dummylogin.features.auth.data.model.LoginResponse
@@ -12,7 +12,7 @@ class AuthRepository(private val service: AuthService) {
             if(response.isSuccessful){
                 Result.success(response.body()!!)
             }else{
-                Result.failure(Exception("Erro no login"))
+                Result.failure(Exception("Ocorreu um erro ao efetuar login."))
             }
         } catch(e: Exception){
             return Result.failure(e)

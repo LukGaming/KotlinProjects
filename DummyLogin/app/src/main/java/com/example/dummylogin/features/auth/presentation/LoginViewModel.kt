@@ -2,13 +2,17 @@ package com.example.dummylogin.features.auth.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.dummylogin.core.base.UiState
 import com.example.dummylogin.core.storage.SessionManager
+import com.example.dummylogin.features.auth.data.repositories.AuthRepository
 import com.example.dummylogin.features.auth.domain.usecases.LoginUseCase
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val loginUseCase: LoginUseCase, private val sessionManager: SessionManager) : ViewModel() {
+
+
     val state = MutableLiveData<UiState<Unit>>()
 
     fun login(email: String, password: String){
@@ -18,7 +22,7 @@ class LoginViewModel(private val loginUseCase: LoginUseCase, private val session
 
             state.value = result.fold(
                 onSuccess = {
-                    sessionManager.saveToken(it.token)
+                    sessionManager.saveToken(it.accessToken)
                     UiState.Success(Unit)
                 }, onFailure = {
                     UiState.Error(it.message ?: "Erro")
@@ -28,4 +32,14 @@ class LoginViewModel(private val loginUseCase: LoginUseCase, private val session
     }
 
 
+}
+
+class LoginViewModelFactory(
+    private val loginUseCase: LoginUseCase,
+    private val sessionManager: SessionManager
+) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return LoginViewModel(loginUseCase, sessionManager) as T
+    }
 }
