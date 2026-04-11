@@ -2,6 +2,7 @@ package com.example.dummylogin.features.auth.presentation
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -16,6 +17,7 @@ import com.example.dummylogin.core.storage.SessionManager
 import com.example.dummylogin.features.auth.data.repositories.AuthRepository
 import com.example.dummylogin.features.auth.data.remote.AuthService
 import com.example.dummylogin.features.auth.domain.usecases.LoginUseCase
+import kotlin.math.log
 
 class LoginActivity: AppCompatActivity() {
 
@@ -102,6 +104,6 @@ class LoginActivity: AppCompatActivity() {
     }
 
     fun navigateToHome(){
-        print("Login sucesso!")
+        Log.i("LOGIN", "Login sucesso!")
     }
 }
