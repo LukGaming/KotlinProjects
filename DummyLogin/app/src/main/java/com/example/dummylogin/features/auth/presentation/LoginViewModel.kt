@@ -22,7 +22,7 @@ class LoginViewModel(private val loginUseCase: LoginUseCase, private val session
 
             state.value = result.fold(
                 onSuccess = {
-                    sessionManager.saveToken(it.accessToken)
+                    sessionManager.saveUser(it)
                     UiState.Success(Unit)
                 }, onFailure = {
                     UiState.Error(it.message ?: "Erro")
