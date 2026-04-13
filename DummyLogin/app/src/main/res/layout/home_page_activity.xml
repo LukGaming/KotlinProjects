@@ -9,9 +9,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:title="Home"
+        android:title="Olá, Paulo!"
         app:menu="@menu/home_menu"
-        android:background="@color/design_default_color_on_primary"
+        android:background="@android:color/holo_purple"
+        app:titleTextColor="@color/white"
         />
 
 
