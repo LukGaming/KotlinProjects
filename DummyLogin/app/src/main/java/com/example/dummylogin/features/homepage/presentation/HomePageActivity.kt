@@ -13,9 +13,7 @@ class HomePageActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = HomePageActivityBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
         setupAppBar()
     }
@@ -24,16 +22,13 @@ class HomePageActivity: AppCompatActivity() {
         val user = SessionManager(this).getUser()
         binding.toolbar.title = "Olá, ${user?.firstName}"
         binding.toolbar.setOnMenuItemClickListener { item ->
-
             when(item.itemId){
                 R.id.menu_profile -> {
                     goToProfile()
                     true
                 }
-
                 else -> false
             }
-
         }
     }
 
