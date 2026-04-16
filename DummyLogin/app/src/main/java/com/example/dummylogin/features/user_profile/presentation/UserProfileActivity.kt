@@ -51,7 +51,7 @@ class UserProfileActivity: AppCompatActivity() {
         sessionManager.clear()
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
-        finish()
+        finishScren(view)
     }
 
     private fun finishScren(view: View){

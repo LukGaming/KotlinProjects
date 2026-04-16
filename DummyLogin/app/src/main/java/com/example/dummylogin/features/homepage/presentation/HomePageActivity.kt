@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.dummylogin.R
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dummylogin.core.storage.SessionManager
 import com.example.dummylogin.databinding.HomePageActivityBinding
 import com.example.dummylogin.features.user_profile.presentation.UserProfileActivity
@@ -35,6 +36,15 @@ class HomePageActivity: AppCompatActivity() {
     fun goToProfile(){
         val intent = Intent(this, UserProfileActivity::class.java)
         startActivity(intent)
+    }
 
+    private fun setupRecycler(){
+        binding.reciclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun loadData(){
+        val products = mocksProducts() // temporário
+
+        binding.reciclerView.adapter = ProductAdapter(products)
     }
 }
