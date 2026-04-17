@@ -2,21 +2,54 @@ package com.example.dummylogin.features.homepage.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import com.example.dummylogin.R
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dummylogin.core.base.UiState
 import com.example.dummylogin.core.storage.SessionManager
 import com.example.dummylogin.databinding.HomePageActivityBinding
+import com.example.dummylogin.features.homepage.data.remote.ProductApi
+import com.example.dummylogin.features.homepage.data.remote.RetrofitClient
+import com.example.dummylogin.features.homepage.data.repository.ProductRepositoryImpl
+import com.example.dummylogin.features.homepage.domain.GetProductsUseCase
+import com.example.dummylogin.features.homepage.domain.Product
 import com.example.dummylogin.features.user_profile.presentation.UserProfileActivity
 
 class HomePageActivity: AppCompatActivity() {
     lateinit var binding: HomePageActivityBinding
+    lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = HomePageActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupViewModel()
         setupAppBar()
+        setupRecycler()
+        loadData()
+        observeResult()
+    }
+
+    fun observeResult(){
+        viewModel.state.observe(this) { state ->
+
+            when(state){
+                is UiState.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is UiState.Success -> {
+                    binding.recyclerView.adapter = ProductAdapter(state.data)
+                    binding.progressBar.visibility = View.GONE
+                }
+                is UiState.Error -> {
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        }
     }
 
     fun setupAppBar(){
@@ -39,12 +72,25 @@ class HomePageActivity: AppCompatActivity() {
     }
 
     private fun setupRecycler(){
-        binding.reciclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun loadData(){
-        val products = mocksProducts() // temporário
+        viewModel.loadProducts();
 
-        binding.reciclerView.adapter = ProductAdapter(products)
     }
+
+    private fun setupViewModel(){
+        val api = RetrofitClient.api;
+        val repository = ProductRepositoryImpl(api);
+        val useCase = GetProductsUseCase(repository)
+
+        viewModel = ViewModelProvider(
+            this,
+            HomeViewModelFactory(useCase)
+        )[HomeViewModel::class.java]
+
+
+    }
+
 }
