@@ -16,6 +16,7 @@ import com.example.dummylogin.features.homepage.data.remote.RetrofitClient
 import com.example.dummylogin.features.homepage.data.repository.ProductRepositoryImpl
 import com.example.dummylogin.features.homepage.domain.GetProductsUseCase
 import com.example.dummylogin.features.homepage.domain.Product
+import com.example.dummylogin.features.product_detail.ProductDetailActivity
 import com.example.dummylogin.features.user_profile.presentation.UserProfileActivity
 
 class HomePageActivity: AppCompatActivity() {
@@ -41,7 +42,9 @@ class HomePageActivity: AppCompatActivity() {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is UiState.Success -> {
-                    binding.recyclerView.adapter = ProductAdapter(state.data)
+                    binding.recyclerView.adapter = ProductAdapter(state.data ) {
+                        product -> goToDetail(product)
+                    }
                     binding.progressBar.visibility = View.GONE
                 }
                 is UiState.Error -> {
@@ -89,8 +92,12 @@ class HomePageActivity: AppCompatActivity() {
             this,
             HomeViewModelFactory(useCase)
         )[HomeViewModel::class.java]
+    }
 
-
+    private fun goToDetail(product: Product){
+        val intent = Intent(this, ProductDetailActivity::class.java)
+        intent.putExtra("product_id", product.id)
+        startActivity(intent)
     }
 
 }

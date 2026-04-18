@@ -7,7 +7,8 @@ data class ProductDto(
     val title: String,
     val price: Double,
     val rating: Double,
-    val thumbnail: String
+    val thumbnail: String,
+    val description: String
 ) {
     fun toDomain(): Product {
         return Product(
@@ -15,7 +16,8 @@ data class ProductDto(
             title = title,
             price = price,
             rating = rating,
-            thumbnail = thumbnail
+            thumbnail = thumbnail,
+            description = description
         )
     }
 }
