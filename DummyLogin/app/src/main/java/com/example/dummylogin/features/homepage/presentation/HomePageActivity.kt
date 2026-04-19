@@ -16,7 +16,7 @@ import com.example.dummylogin.features.homepage.data.remote.RetrofitClient
 import com.example.dummylogin.features.homepage.data.repository.ProductRepositoryImpl
 import com.example.dummylogin.features.homepage.domain.GetProductsUseCase
 import com.example.dummylogin.features.homepage.domain.Product
-import com.example.dummylogin.features.product_detail.ProductDetailActivity
+import com.example.dummylogin.features.product_detail.presentation.ProductDetailActivity
 import com.example.dummylogin.features.user_profile.presentation.UserProfileActivity
 
 class HomePageActivity: AppCompatActivity() {

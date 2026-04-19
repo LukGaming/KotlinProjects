@@ -18,4 +18,13 @@ class ProductRepositoryImpl(private val api: ProductApi): ProductRepository {
         }
     }
 
+    override suspend fun getProductById(id: Int): Result<Product> {
+        return try {
+            Result.success(api.getProductById(id).toDomain())
+        }
+        catch (e: Exception){
+            return Result.failure(e)
+        }
+    }
+
 }
