@@ -3,6 +3,7 @@ package com.example.dummylogin.features.homepage.data.repository
 import com.example.dummylogin.features.homepage.data.models.ProductDto
 import com.example.dummylogin.features.homepage.data.remote.ProductApi
 import com.example.dummylogin.features.homepage.domain.Product
+import kotlinx.coroutines.delay
 
 class ProductRepositoryImpl(private val api: ProductApi): ProductRepository {
     override suspend fun getProduts(): Result<List<Product>> {

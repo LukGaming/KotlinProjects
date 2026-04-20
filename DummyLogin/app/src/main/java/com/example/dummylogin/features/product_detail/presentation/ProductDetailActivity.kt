@@ -8,16 +8,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.dummylogin.core.base.UiState
 import com.example.dummylogin.databinding.ProductDetailBinding
+import com.example.dummylogin.features.cart.CartManager
 import com.example.dummylogin.features.homepage.data.remote.RetrofitClient
 import com.example.dummylogin.features.homepage.data.repository.ProductRepositoryImpl
+import com.example.dummylogin.features.homepage.domain.Product
 import com.example.dummylogin.features.product_detail.domain.GetProductByIdUseCase
 
 class ProductDetailActivity: AppCompatActivity() {
     lateinit var viewModel: ProductDetailViewModel
 
     lateinit var binding: ProductDetailBinding
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +27,7 @@ class ProductDetailActivity: AppCompatActivity() {
         setupViewModel()
         observeViewModel()
         getProductById()
+        binding.pushToCartButton.setOnClickListener(::addProductToCart)
     }
 
     private fun observeViewModel(){
@@ -35,7 +36,9 @@ class ProductDetailActivity: AppCompatActivity() {
 
 
             when(it){
-                is UiState.Loading -> {}
+                is UiState.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
                 is UiState.Success -> {
                     val product = it.data
                     binding.tvTitle.text = product.title
@@ -45,8 +48,12 @@ class ProductDetailActivity: AppCompatActivity() {
                     Glide.with(binding.imgProduct)
                         .load(product.thumbnail)
                         .into(binding.imgProduct)
+
+                    binding.progressBar.visibility = View.GONE
                 }
-                is UiState.Error -> {}
+                is UiState.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                }
             }
         }
     }
@@ -69,5 +76,14 @@ class ProductDetailActivity: AppCompatActivity() {
 
     private fun finishScren(view: View){
         finish()
+    }
+
+    private fun addProductToCart(view: View){
+            val product = viewModel.currentProduct
+
+        if(product != null){
+            CartManager.addProduct(product)
+        }
+
     }
 }

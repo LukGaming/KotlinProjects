@@ -35,6 +35,7 @@ class HomePageActivity: AppCompatActivity() {
     }
 
     fun observeResult(){
+
         viewModel.state.observe(this) { state ->
 
             when(state){
@@ -64,6 +65,10 @@ class HomePageActivity: AppCompatActivity() {
                     goToProfile()
                     true
                 }
+                R.id.menu_cart -> {
+                    goToCartPage()
+                    true
+                }
                 else -> false
             }
         }
@@ -79,6 +84,7 @@ class HomePageActivity: AppCompatActivity() {
     }
 
     private fun loadData(){
+        binding.progressBar.visibility = View.VISIBLE
         viewModel.loadProducts();
 
     }
@@ -98,6 +104,10 @@ class HomePageActivity: AppCompatActivity() {
         val intent = Intent(this, ProductDetailActivity::class.java)
         intent.putExtra("product_id", product.id)
         startActivity(intent)
+    }
+
+    private fun goToCartPage(view: View){
+        var intent = Intent(this, Cart)
     }
 
 }

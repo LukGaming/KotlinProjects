@@ -16,6 +16,8 @@ class ProductDetailViewModel(
 
     val state = MutableLiveData<UiState<Product>>();
 
+    var currentProduct: Product? = null;
+
     fun getProductById(id: Int){
         viewModelScope.launch {
             state.value = UiState.Loading
@@ -24,6 +26,7 @@ class ProductDetailViewModel(
 
             state.value = response.fold(
                 onSuccess = {
+                    currentProduct = it;
                     UiState.Success(it)
                 },
                 onFailure = {

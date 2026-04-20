@@ -5,4 +5,9 @@
         android:title="Perfil"
         android:icon="@android:drawable/btn_dropdown"
         />
+    <item
+        android:id="@+id/menu_cart"
+        android:title="Carrinho"
+        android:icon="@drawable/ic_cart"
+        />
 </menu>
