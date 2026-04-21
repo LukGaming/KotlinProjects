@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dummylogin.core.base.UiState
 import com.example.dummylogin.core.storage.SessionManager
 import com.example.dummylogin.databinding.HomePageActivityBinding
+import com.example.dummylogin.features.cart.presentation.CartActivity
 import com.example.dummylogin.features.homepage.data.remote.ProductApi
 import com.example.dummylogin.features.homepage.data.remote.RetrofitClient
 import com.example.dummylogin.features.homepage.data.repository.ProductRepositoryImpl
@@ -106,8 +107,9 @@ class HomePageActivity: AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun goToCartPage(view: View){
-        var intent = Intent(this, Cart)
+    private fun goToCartPage(){
+        val intent = Intent(this, CartActivity::class.java)
+        startActivity(intent)
     }
 
 }

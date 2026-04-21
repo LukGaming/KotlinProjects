@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.dummylogin.core.base.UiState
 import com.example.dummylogin.databinding.ProductDetailBinding
 import com.example.dummylogin.features.cart.CartManager
+import com.example.dummylogin.features.cart.presentation.CartActivity
 import com.example.dummylogin.features.homepage.data.remote.RetrofitClient
 import com.example.dummylogin.features.homepage.data.repository.ProductRepositoryImpl
 import com.example.dummylogin.features.homepage.domain.Product
@@ -79,11 +80,16 @@ class ProductDetailActivity: AppCompatActivity() {
     }
 
     private fun addProductToCart(view: View){
-            val product = viewModel.currentProduct
+        val product = viewModel.currentProduct
 
         if(product != null){
             CartManager.addProduct(product)
+            goToCart()
         }
+    }
 
+    private fun goToCart(){
+        val intent = Intent(this, CartActivity::class.java);
+        startActivity(intent)
     }
 }
