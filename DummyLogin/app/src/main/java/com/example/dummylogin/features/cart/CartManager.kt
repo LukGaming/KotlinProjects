@@ -15,7 +15,8 @@ object CartManager {
                     productId = product.id,
                     title = product.title,
                     price = product.price,
-                    quantity = 1
+                    quantity = 1,
+                    thumbnail = product.thumbnail
                 )
             )
         }
@@ -29,5 +30,18 @@ object CartManager {
 
     fun getTotal(): Double{
         return items.sumOf { it.price * it.quantity }
+    }
+
+    fun removeProduct(itemId: Int){
+        val item = items.find { it.productId == itemId }
+
+        item?.let {
+            if(it.quantity > 1){
+                it.quantity--
+            }
+            else{
+                items.remove(it)
+            }
+        }
     }
 }

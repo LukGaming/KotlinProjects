@@ -50,7 +50,30 @@
                 android:layout_marginTop="4dp"
                 />
 
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                />
 
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            >
+            <Button
+                android:id="@+id/btnRemove"
+                android:layout_width="wrap_content"
+                android:text="Remover"
+                android:layout_height="wrap_content"
+                />
         </LinearLayout>
 
 
