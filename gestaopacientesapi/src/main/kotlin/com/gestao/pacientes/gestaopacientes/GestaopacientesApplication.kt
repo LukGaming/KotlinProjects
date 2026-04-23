@@ -13,6 +13,8 @@ import kotlinx.serialization.json.Json
 import org.slf4j.event.Level
 import com.gestao.pacientes.gestaopacientes.config.configureRouting
 import com.gestao.pacientes.gestaopacientes.config.configureLogging
+import com.gestao.pacientes.gestaopacientes.config.configureSecurity
+import com.gestao.pacientes.gestaopacientes.data.DatabaseFactory
 
 fun main() {
     embeddedServer(
@@ -46,6 +48,12 @@ fun Application.configureServer() {
     // Log da inicialização
     configureLogging()
 
+    // Inicializar banco em memória (SQLite + Exposed)
+    DatabaseFactory.init()
+
+    // Configurar autenticação JWT
+    val authService = configureSecurity()
+
     // Configurar rotas
-    configureRouting()
+    configureRouting(authService)
 }

@@ -1,7 +1,19 @@
 server:
   port: 8080
-  
+
 ktor:
   application:
     environment: local
     modules: [com.gestao.pacientes.gestaopacientes.ApplicationKt]
+
+jwt:
+  issuer: gestao-pacientes-api
+  audience: gestao-pacientes-clients
+  realm: GestaoPacientesRealm
+  secret: dev-secret-change-me
+  expiresInSeconds: 3600
+
+auth:
+  login:
+    email: admin@gestao.local
+    senha: 123456
