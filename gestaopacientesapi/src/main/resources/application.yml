@@ -1,0 +1,7 @@
+server:
+  port: 8080
+  
+ktor:
+  application:
+    environment: local
+    modules: [com.gestao.pacientes.gestaopacientes.ApplicationKt]
