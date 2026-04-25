@@ -18,6 +18,8 @@ class LoginViewModel(private val loginUseCase: LoginUseCase): ViewModel() {
                 loginUseCase.execute(email, password)
             }.onSuccess { token ->
                 _state.value = LoginState.Success(token)
+            }.onFailure {
+                _state.value = LoginState.Error(it.message ?: "Erro ao efetuar login")
             }
         }
     }
